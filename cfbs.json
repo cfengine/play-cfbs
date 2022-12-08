@@ -13,6 +13,20 @@
       "commit": "c92106b72ac9a9f12e412df7ecba1ea22bcb373a",
       "added_by": "cfbs add",
       "steps": ["run ./prepare.sh -y", "copy ./ ./"]
+    },
+    {
+      "name": "inventory-sudoers",
+      "description": "Inventory users with sudo access.",
+      "tags": ["supported", "inventory", "security", "sudo"],
+      "repo": "https://github.com/nickanderson/cfengine-inventory-sudoers",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.2",
+      "commit": "ba9768f0e09914e41dae95fbf81caed90c1e6ed4",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./policy/main.cf services/inventory-sudoers/main.cf",
+        "json ./cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
