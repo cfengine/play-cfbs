@@ -130,6 +130,21 @@
         "copy ./ssh-max-auth-tries.cf services/security-hardening/ssh-max-auth-tries/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "sudo-enforce-allowed-users",
+      "description": "This module ensures the following lines 'ALL ALL=(ALL) ALL' and 'ALL ALL=(ALL:ALL) ALL' are not present in /etc/sudoers.conf",
+      "tags": ["security", "management", "sudo", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.2",
+      "commit": "ab4f6c01c2f41dfdfef05100eac4c8abf894b74c",
+      "subdirectory": "./sudo-enforce-allowed-users/",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./sudo-enforce-allowed-users.cf services/security-hardening/sudo-enforce-allowed-users/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
