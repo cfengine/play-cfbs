@@ -482,6 +482,22 @@
         "bundles uninstall_rsh_server",
         "policy_files services/cfbs/modules/uninstall-rsh-server/uninstall-rsh-server.cf"
       ]
+    },
+    {
+      "name": "etc-motd-access",
+      "description": "Limit access to /etc/motd by setting user, group, and permission bits.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "0.0.1",
+      "commit": "2c54a98a05bb0315c7a5b9b2edf17a629f151563",
+      "subdirectory": "security/etc-motd-access",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy etc-motd-access.cf services/cfbs/modules/etc-motd-access/etc-motd-access.cf",
+        "bundles etc_motd_access",
+        "policy_files services/cfbs/modules/etc-motd-access/etc-motd-access.cf"
+      ]
     }
   ],
   "git": true
