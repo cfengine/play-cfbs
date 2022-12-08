@@ -530,6 +530,22 @@
         "policy_files services/cfbs/delete-home-dotshots/",
         "bundles delete_home_dotshosts:main"
       ]
+    },
+    {
+      "name": "etc-issue-access",
+      "description": "Limit access to /etc/issue by setting user, group, and permission bits.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "0.0.1",
+      "commit": "36ff5729aeba97d72bdadfdb53bb4cc19c81f900",
+      "subdirectory": "security/etc-issue-access",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy etc-issue-access.cf services/cfbs/modules/etc-issue-access/etc-issue-access.cf",
+        "bundles etc_issue_access",
+        "policy_files services/cfbs/modules/etc-issue-access/etc-issue-access.cf"
+      ]
     }
   ],
   "git": true
