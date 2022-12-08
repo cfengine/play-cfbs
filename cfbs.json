@@ -260,6 +260,21 @@
       "steps": [
         "copy ./openldap_server_policy.cf services/autorun/openldap_server_policy.cf"
       ]
+    },
+    {
+      "name": "inventory-writable-directories-in-root-path",
+      "description": "This module inventories directories in root's $PATH that are world or group writable.",
+      "tags": ["supported", "inventory", "security"],
+      "repo": "https://github.com/nickanderson/cfengine-writable-directories-in-root-path",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.1",
+      "commit": "11fe0552d0cfde9d7280c629cea18cb0e2fd2a8b",
+      "subdirectory": "./inventory-writable-directories-in-root-path/",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./inventory-world-group-writable-root-path.cf services/world-writable-directories-in-root-path/",
+        "json ./cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
