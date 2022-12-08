@@ -546,6 +546,23 @@
         "bundles etc_issue_access",
         "policy_files services/cfbs/modules/etc-issue-access/etc-issue-access.cf"
       ]
+    },
+    {
+      "name": "inventory-local-users-unhashed-password",
+      "description": "Adds reporting data (inventory) for local users not using hashed passwords.",
+      "tags": ["supported", "inventory", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.0",
+      "commit": "057f24c8e96ef5504779d45f3f8a19907ccf0b32",
+      "subdirectory": "security/inventory-local-users-unhashed-password/",
+      "dependencies": ["library-parsed-local-users"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy policy/main.cf services/cfbs/inventory-local-users-unhashed-password/",
+        "policy_files services/cfbs/inventory-local-users-unhashed-password/",
+        "bundles inventory_local_users_unhashed_password:main"
+      ]
     }
   ],
   "git": true
