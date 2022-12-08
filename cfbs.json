@@ -366,6 +366,19 @@
         "copy ./root-path-enforce-group-other-not-writable.cf services/world-writable-directories-in-root-path/",
         "json ./cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "tmp-nosuid",
+      "description": "This module has a policy file which makes sure /tmp is mounted with the 'nosuid' option",
+      "tags": ["supported", "security", "compliance", "tmp"],
+      "repo": "https://github.com/vpodzime/cfengine-security-hardening",
+      "by": "https://github.com/vpodzime",
+      "version": "0.0.2",
+      "commit": "5be7c3ef332138b5717231d289bda59449b66d5c",
+      "subdirectory": "tmp-nosuid",
+      "dependencies": ["autorun"],
+      "added_by": "cfbs add",
+      "steps": ["copy ./tmp_nosuid.cf services/autorun/tmp_nosuid.cf"]
     }
   ],
   "git": true
