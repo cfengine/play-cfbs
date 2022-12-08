@@ -334,6 +334,22 @@
       "steps": [
         "copy ./disable_prelinking.cf services/autorun/disable_prelinking.cf"
       ]
+    },
+    {
+      "name": "ssh-permit-empty-passwords-no",
+      "description": "This module ensures that PermitEmptyPasswords is set to no.",
+      "tags": ["security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.4",
+      "commit": "705cd6a9c90b691b78a18876f1980d4d16fc9b1c",
+      "subdirectory": "./ssh-permit-empty-passwords-no/",
+      "dependencies": ["library-sshd-config"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ssh-permit-empty-passwords-no.cf services/security-hardening/ssh-permit-empty-passwords-no/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
