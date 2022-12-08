@@ -42,6 +42,37 @@
         "json cfbs/def.json def.json",
         "copy policy/default-encrypt-method-sha512.cf services/security-hardening/default-encrypt-method-sha512/default-encrypt-method-sha512.cf"
       ]
+    },
+    {
+      "name": "library-sshd-config",
+      "description": "This module provides policy for managing sshd configuration.",
+      "tags": ["library", "security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-ssh",
+      "by": "https://github.com/nickanderson",
+      "version": "0.1.0",
+      "commit": "abff34c08bf27af56c4c3939bbb6f848eac7fb8d",
+      "subdirectory": "modules/library-sshd-config/",
+      "added_by": "ssh-permit-root-login-no",
+      "steps": [
+        "copy ./global-key-values.cf services/library-sshd-config/",
+        "json cfbs/def.json def.json"
+      ]
+    },
+    {
+      "name": "ssh-permit-root-login-no",
+      "description": "This module ensures that the SSH daemon does not permit logging in as root",
+      "tags": ["security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.3",
+      "commit": "124b01041a3d45010ac20912338795e81e2a06fe",
+      "subdirectory": "./ssh-permit-root-login-no/",
+      "dependencies": ["library-sshd-config"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ssh-permit-root-login-no.cf services/security-hardening/ssh-permit-root-login-no/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
