@@ -437,6 +437,35 @@
       "subdirectory": "management/every-minute",
       "added_by": "cfbs add",
       "steps": ["json def.json def.json"]
+    },
+    {
+      "name": "lynis",
+      "description": "CFEngine policy to automate the installation, running, and reporting of CISOfy's lynis system audits",
+      "tags": ["security", "compliance", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-lynis",
+      "by": "https://github.com/nickanderson",
+      "version": "0.3.2",
+      "commit": "da3dc477846d4885688aba93f4f0df38dd14bf53",
+      "added_by": "compliance-report-lynis",
+      "steps": [
+        "copy policy/main.cf services/lynis/main.cf",
+        "json cfbs/def.json def.json"
+      ]
+    },
+    {
+      "name": "compliance-report-lynis",
+      "version": "0.0.2",
+      "description": "Compliance report with Lynis checks",
+      "tags": ["experimental", "security", "compliance"],
+      "repo": "https://github.com/nickanderson/cfengine-lynis",
+      "by": "https://github.com/nickanderson/",
+      "commit": "60ad7321d6b5e30606830d3228812fe3f77c4fa8",
+      "subdirectory": "./compliance-reports",
+      "dependencies": ["compliance-report-imports", "lynis"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./generated-compliance-report.json .no-distrib/compliance-report-definitions/lynis-compliance-report.json"
+      ]
     }
   ],
   "git": true
