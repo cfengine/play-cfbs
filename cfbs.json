@@ -425,6 +425,18 @@
       "steps": [
         "copy ./inventory_yum_update_info.cf services/autorun/inventory_yum_update_info.cf"
       ]
+    },
+    {
+      "name": "every-minute",
+      "version": "1.0.0-1",
+      "description": "Make policy fetching, evaluation, and reporting happen every minute",
+      "tags": ["management", "experimental"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "commit": "74b6776ca4e120285f9c44e68ccf79eef84accfd",
+      "subdirectory": "management/every-minute",
+      "added_by": "cfbs add",
+      "steps": ["json def.json def.json"]
     }
   ],
   "git": true
