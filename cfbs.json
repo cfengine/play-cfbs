@@ -563,6 +563,22 @@
         "policy_files services/cfbs/inventory-local-users-unhashed-password/",
         "bundles inventory_local_users_unhashed_password:main"
       ]
+    },
+    {
+      "name": "enable-aslr",
+      "description": "Ensure that Address space layout randomization (ASLR) is enabled on the system",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/craigcomstock",
+      "version": "0.0.2",
+      "commit": "5507dc81587ccb833c5092fd5baeb52dd1b3fdd3",
+      "subdirectory": "security/enable-aslr",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy enable-aslr.cf services/cfbs/modules/enable-aslr/enable-aslr.cf",
+        "bundles enable_aslr",
+        "policy_files services/cfbs/modules/enable-aslr/enable-aslr.cf"
+      ]
     }
   ],
   "git": true
