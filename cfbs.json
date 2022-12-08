@@ -394,6 +394,22 @@
         "copy ./tmp-file-age.cf services/security-hardening/tmp-file-age/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "ssh-ciphers-strong",
+      "description": "This module ensures that the SSH daemon uses strong ciphers",
+      "tags": ["security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.4",
+      "commit": "7c5e3638ddcf2ba097644eefe0a3bc9d7f2269e6",
+      "subdirectory": "./ssh-ciphers-strong/",
+      "dependencies": ["library-sshd-config"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ssh-ciphers-strong.cf services/security-hardening/ssh-ciphers-strong/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
