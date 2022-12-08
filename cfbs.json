@@ -275,6 +275,21 @@
         "copy ./inventory-world-group-writable-root-path.cf services/world-writable-directories-in-root-path/",
         "json ./cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "ntp-maxpoll",
+      "description": "This module ensures that maxpoll is configured to 10 unless default:ntp_maxpoll._config[maxpoll] is defined in which case that value will be used.",
+      "tags": ["supported", "security", "management"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.3",
+      "commit": "e2519214e8a29c7f37a36ca8a4beec687712448d",
+      "subdirectory": "./ntp-maxpoll/",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ntp-maxpoll.cf services/security-hardening/ntp-maxpoll/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
