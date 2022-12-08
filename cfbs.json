@@ -172,6 +172,20 @@
       "dependencies": ["autorun"],
       "added_by": "cfbs add",
       "steps": ["copy ./uninstall_ftp.cf services/autorun/uninstall_ftp.cf"]
+    },
+    {
+      "name": "cfengine-supported",
+      "description": "Inventory the support status for the current version of CFEngine.",
+      "tags": ["supported", "inventory", "security"],
+      "repo": "https://github.com/nickanderson/cfengine-supported",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.1",
+      "commit": "6a09cc850423a063533ffe19e9066753952b9d8d",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./inventory-cfengine-version-support-status.cf services/cfengine-supported/",
+        "json ./cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
