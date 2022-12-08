@@ -514,6 +514,22 @@
         "bundles uninstall_talk",
         "policy_files services/cfbs/modules/uninstall-talk/uninstall-talk.cf"
       ]
+    },
+    {
+      "name": "delete-home-dotshosts",
+      "description": "Ensure that ~/.shosts files are not present, as they present a security risk",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.4",
+      "commit": "8bb6e0703139ffc979159b7a2d2750f08b80b497",
+      "subdirectory": "security/delete-home-dotshosts",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy policy/main.cf services/cfbs/delete-home-dotshots/",
+        "policy_files services/cfbs/delete-home-dotshots/",
+        "bundles delete_home_dotshosts:main"
+      ]
     }
   ],
   "git": true
