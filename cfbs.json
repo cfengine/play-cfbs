@@ -410,6 +410,21 @@
         "copy ./ssh-ciphers-strong.cf services/security-hardening/ssh-ciphers-strong/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "inventory-yum-update-info",
+      "description": "This module adds information about security updates from 'yum updateinfo' to inventory",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/vpodzime/cfengine-security-hardening",
+      "by": "https://github.com/vpodzime",
+      "version": "0.0.1",
+      "commit": "c89da2dbdf2f8a4baf7b6646d2e15e98a00ff365",
+      "subdirectory": "inventory-yum-update-info",
+      "dependencies": ["autorun"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./inventory_yum_update_info.cf services/autorun/inventory_yum_update_info.cf"
+      ]
     }
   ],
   "git": true
