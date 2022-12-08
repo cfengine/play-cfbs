@@ -379,6 +379,21 @@
       "dependencies": ["autorun"],
       "added_by": "cfbs add",
       "steps": ["copy ./tmp_nosuid.cf services/autorun/tmp_nosuid.cf"]
+    },
+    {
+      "name": "tmp-file-age",
+      "description": "This module inventories and manages old files in /tmp.",
+      "tags": ["supported", "inventory", "management", "security", "tmp"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.1",
+      "commit": "56a7c149f33808db6796de77eff6eb0502c01e61",
+      "subdirectory": "./tmp-file-age/",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./tmp-file-age.cf services/security-hardening/tmp-file-age/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
