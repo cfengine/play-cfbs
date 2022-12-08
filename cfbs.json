@@ -320,6 +320,20 @@
       "steps": [
         "copy ./sudo-requires-password.cf services/autorun/sudo-requires-password.cf"
       ]
+    },
+    {
+      "name": "disable-prelinking",
+      "description": "Disable prelinking.",
+      "tags": ["supported", "security"],
+      "repo": "https://github.com/larsewi/cfengine-prelinking-disabled",
+      "by": "https://github.com/larsewi",
+      "version": "1.0.3",
+      "commit": "4b309622404e6a6e989989a229fe780bec029de5",
+      "dependencies": ["autorun"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./disable_prelinking.cf services/autorun/disable_prelinking.cf"
+      ]
     }
   ],
   "git": true
