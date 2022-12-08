@@ -290,6 +290,22 @@
         "copy ./ntp-maxpoll.cf services/security-hardening/ntp-maxpoll/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "ssh-protocol-2",
+      "description": "This module ensures that the SSH daemon uses SSH protocol 2.",
+      "tags": ["security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.3",
+      "commit": "124b01041a3d45010ac20912338795e81e2a06fe",
+      "subdirectory": "./ssh-protocol-2/",
+      "dependencies": ["library-sshd-config"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ssh-protocol-2.cf services/security-hardening/ssh-protocol-2/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
