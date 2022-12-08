@@ -145,6 +145,20 @@
         "copy ./sudo-enforce-allowed-users.cf services/security-hardening/sudo-enforce-allowed-users/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "inventory-lastlog",
+      "description": "Inventory users who have logged in and when.",
+      "tags": ["inventory", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-inventory-lastlog",
+      "by": "https://github.com/nickanderson",
+      "version": "0.1.1",
+      "commit": "7436a6ca9d1a159e6083768b9c06d9b1cbb189a0",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy policy/main.cf services/inventory-lastlog/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
