@@ -498,6 +498,22 @@
         "bundles etc_motd_access",
         "policy_files services/cfbs/modules/etc-motd-access/etc-motd-access.cf"
       ]
+    },
+    {
+      "name": "uninstall-talk",
+      "description": "Ensure the talk client and server packages are not installed",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "0.0.1",
+      "commit": "36ff5729aeba97d72bdadfdb53bb4cc19c81f900",
+      "subdirectory": "security/uninstall-talk",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy uninstall-talk.cf services/cfbs/modules/uninstall-talk/uninstall-talk.cf",
+        "bundles uninstall_talk",
+        "policy_files services/cfbs/modules/uninstall-talk/uninstall-talk.cf"
+      ]
     }
   ],
   "git": true
