@@ -217,6 +217,34 @@
         "copy ./inventory-non-root-users-with-uid-zero.cf services/local-users/inventory_non_root_users_with_uid_zero/inventory-non-root-users-with-uid-zero.cf",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "compliance-report-imports",
+      "description": "Keep compliance report definitions up to date",
+      "tags": ["experimental", "cfengine-enterprise"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.8",
+      "commit": "06f0894b662befbba4e775884f21cfe8573c32d6",
+      "subdirectory": "./compliance-report-imports",
+      "dependencies": ["autorun"],
+      "added_by": "compliance-report-os-is-vendor-supported",
+      "steps": ["copy ./compliance-report-imports.cf services/autorun/"]
+    },
+    {
+      "name": "compliance-report-os-is-vendor-supported",
+      "description": "Compliance report definition for checking if the current OS version is supported by the vendor",
+      "tags": ["experimental", "compliance-report", "cfengine-enterprise"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "0.0.2",
+      "commit": "d9e0aad225535b2b16ba2126e8302f8ffc5e7d38",
+      "subdirectory": "./compliance-report-os-is-vendor-supported",
+      "dependencies": ["compliance-report-imports"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./os-is-vendor-supported.json .no-distrib/compliance-report-definitions/os-is-vendor-supported.json"
+      ]
     }
   ],
   "git": true
