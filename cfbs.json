@@ -186,6 +186,37 @@
         "copy ./inventory-cfengine-version-support-status.cf services/cfengine-supported/",
         "json ./cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "library-parsed-local-users",
+      "description": "Parse local users from /etc/passwd on the system with their attributes from /etc/shadow",
+      "tags": ["supported", "library"],
+      "repo": "https://github.com/nickanderson/cfengine-local_users",
+      "by": "https://github.com/nickanderson",
+      "version": "2.0.5",
+      "commit": "ede282c34083ab807543aa734b1142228ab98993",
+      "subdirectory": "parsed_etc_passwd_shadow/",
+      "added_by": "inventory-local-users-non-root-has-uid-0",
+      "steps": [
+        "copy ./parsed_etc_passwd_shadow.cf services/local-users/parsed_etc_passwd_shadow/",
+        "json cfbs/def.json def.json"
+      ]
+    },
+    {
+      "name": "inventory-local-users-non-root-has-uid-0",
+      "description": "Inventory the non-root users that have uid 0",
+      "tags": ["supported", "inventory", "security"],
+      "repo": "https://github.com/nickanderson/cfengine-local_users",
+      "by": "https://github.com/nickanderson",
+      "version": "2.0.5",
+      "commit": "fef5d94170f8119eda8f5bf8316acf5896fbac22",
+      "subdirectory": "inventory_non_root_users_with_uid_zero/",
+      "dependencies": ["library-parsed-local-users"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./inventory-non-root-users-with-uid-zero.cf services/local-users/inventory_non_root_users_with_uid_zero/inventory-non-root-users-with-uid-zero.cf",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
