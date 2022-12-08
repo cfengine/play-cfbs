@@ -73,6 +73,33 @@
         "copy ./ssh-permit-root-login-no.cf services/security-hardening/ssh-permit-root-login-no/",
         "json cfbs/def.json def.json"
       ]
+    },
+    {
+      "name": "autorun",
+      "description": "Enable autorun functionality",
+      "tags": ["supported", "management"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "1.0.1",
+      "commit": "c3b7329b240cf7ad062a0a64ee8b607af2cb912a",
+      "subdirectory": "management/autorun",
+      "added_by": "uninstall-telnet-server",
+      "steps": ["json def.json def.json"]
+    },
+    {
+      "name": "uninstall-telnet-server",
+      "description": "This module ensures the telnet server package is not installed on the system",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/vpodzime/cfengine-security-hardening",
+      "by": "https://github.com/vpodzime",
+      "version": "0.0.3",
+      "commit": "b0c5d6e9f2a9fb5904cb1eb9cd948ee7907969ea",
+      "subdirectory": "uninstall-telnet-server",
+      "dependencies": ["autorun"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./telnet_server_policy.cf services/autorun/telnet_server_policy.cf"
+      ]
     }
   ],
   "git": true
