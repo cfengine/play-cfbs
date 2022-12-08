@@ -9,8 +9,8 @@
       "tags": ["supported", "base"],
       "repo": "https://github.com/cfengine/masterfiles",
       "by": "https://github.com/cfengine",
-      "version": "3.18.2",
-      "commit": "a87b7fea6f7a88808b327730a4ba784a3dc664eb",
+      "version": "3.18.3",
+      "commit": "c92106b72ac9a9f12e412df7ecba1ea22bcb373a",
       "added_by": "cfbs add",
       "steps": ["run ./prepare.sh -y", "copy ./ ./"]
     }
