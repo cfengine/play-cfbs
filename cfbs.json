@@ -100,6 +100,20 @@
       "steps": [
         "copy ./telnet_server_policy.cf services/autorun/telnet_server_policy.cf"
       ]
+    },
+    {
+      "name": "inventory-kernel-boot-params",
+      "description": "Inventory kernel parameters set during system boot",
+      "tags": ["supported", "inventory"],
+      "repo": "https://github.com/nickanderson/cfengine-inventory-kernel-boot-params",
+      "by": "https://github.com/nickanderson",
+      "version": "0.1.2",
+      "commit": "ab79409970b97831cfb9552d98ca6a8f455e11d4",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy policy/main.cf services/inventory-kernel-boot-params/main.cf",
+        "json augments.json def.json"
+      ]
     }
   ],
   "git": true
