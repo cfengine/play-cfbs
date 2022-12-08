@@ -13,17 +13,6 @@
       "commit": "a87b7fea6f7a88808b327730a4ba784a3dc664eb",
       "added_by": "cfbs add",
       "steps": ["run ./prepare.sh -y", "copy ./ ./"]
-    },
-    {
-      "name": "./enable-aslr.cf",
-      "description": "Local policy file added using cfbs command line",
-      "tags": ["local"],
-      "added_by": "cfbs add",
-      "steps": [
-        "copy ./enable-aslr.cf services/cfbs/enable-aslr.cf",
-        "policy_files services/cfbs/enable-aslr.cf",
-        "bundles enable_aslr"
-      ]
     }
   ],
   "git": true
