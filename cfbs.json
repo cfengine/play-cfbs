@@ -114,6 +114,22 @@
         "copy policy/main.cf services/inventory-kernel-boot-params/main.cf",
         "json augments.json def.json"
       ]
+    },
+    {
+      "name": "ssh-max-auth-tries",
+      "description": "This module limits the maximum authentication attempts (default to 3)",
+      "tags": ["security", "ssh", "experimental"],
+      "repo": "https://github.com/nickanderson/cfengine-security-hardening",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.3",
+      "commit": "124b01041a3d45010ac20912338795e81e2a06fe",
+      "subdirectory": "./ssh-max-auth-tries/",
+      "dependencies": ["library-sshd-config"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./ssh-max-auth-tries.cf services/security-hardening/ssh-max-auth-tries/",
+        "json cfbs/def.json def.json"
+      ]
     }
   ],
   "git": true
