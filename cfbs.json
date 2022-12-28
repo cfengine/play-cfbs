@@ -581,6 +581,47 @@
         "policy_files services/cfbs/modules/uninstall-apache/uninstall-apache.cf",
         "bundles uninstall_apache"
       ]
+    },
+    {
+      "name": "uninstall-packages",
+      "description": "Uninstalls a list of packages specified by module input.",
+      "tags": ["supported", "security", "management"],
+      "repo": "https://github.com/olehermanse/cfengine-uninstall-packages",
+      "by": "https://github.com/olehermanse",
+      "version": "1.0.0",
+      "commit": "82dc210c3085c851f5a8bd3498ed915647800ce1",
+      "input": [
+        {
+          "type": "list",
+          "variable": "package_names",
+          "namespace": "uninstall_packages",
+          "bundle": "uninstall_packages",
+          "label": "Packages to uninstall",
+          "subtype": [
+            {
+              "key": "name",
+              "type": "string",
+              "label": "Name",
+              "question": "What is the name in the package manager (apt, yum, etc.)?"
+            },
+            {
+              "key": "why",
+              "type": "string",
+              "label": "Why",
+              "question": "Why should this package be uninstalled?",
+              "default": "Unknown"
+            }
+          ],
+          "while": "Specify another package you want uninstalled on your hosts?"
+        }
+      ],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy main.cf services/cfbs/modules/uninstall-packages/main.cf",
+        "input uninstall-packages/input.json def.json",
+        "bundles uninstall_packages:uninstall_packages",
+        "policy_files services/cfbs/modules/uninstall-packages/main.cf"
+      ]
     }
   ],
   "git": true
