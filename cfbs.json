@@ -679,6 +679,22 @@
         "policy_files services/cfbs/modules/uninstall-samba/uninstall-samba.cf",
         "bundles uninstall_samba"
       ]
+    },
+    {
+      "name": "uninstall-dhcp",
+      "description": "Ensures the dhcp package is not installed.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "1.0.0",
+      "commit": "6805332200dd48db54c61178c90bf2374c5d8fca",
+      "subdirectory": "security/uninstall-dhcp",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy uninstall-dhcp.cf services/cfbs/modules/uninstall-dhcp/uninstall-dhcp.cf",
+        "policy_files services/cfbs/modules/uninstall-dhcp/uninstall-dhcp.cf",
+        "bundles uninstall_dhcp"
+      ]
     }
   ],
   "git": true
