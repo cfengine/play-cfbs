@@ -7,7 +7,8 @@
       {
         "path": "/tmp/virus",
         "why": "if this common virus is present, delete it!"
-      }
+      },
+      { "path": "/etc/ssh/shosts.equiv", "why": "OpenSCAP CCE-80513-5" }
     ],
     "subtype": [
       {
