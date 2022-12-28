@@ -864,6 +864,13 @@
         "policy_files services/cfbs/modules/maintainers-in-motd.cf",
         "bundles maintainers_in_motd"
       ]
+    },
+    {
+      "name": "./self-upgrade.json",
+      "description": "Local augments file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": ["json ./self-upgrade.json def.json"]
     }
   ],
   "git": true

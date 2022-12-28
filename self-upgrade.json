@@ -1,0 +1,7 @@
+{
+  "classes": {
+   "trigger_upgrade": [
+     "cfengine_3_20_(?!0$)\d+"
+   ]
+  }
+}
