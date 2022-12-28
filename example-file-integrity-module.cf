@@ -1,0 +1,25 @@
+i
+bundle agent example_fim
+{
+  files:
+      "/etc/motd"
+        changes => default:my_fim,
+        classes => default:results( "bundle", "FIM_etc_motd"),
+        if => fileexists( "/etc/motd" );
+
+  reports:
+    inform_mode.FIM_etc_motd_reached::
+      "Promise to monitor /etc/motd for change was reached";
+
+    inform_mode.FIM_etc_motd_repaired::
+      "Promise to monitor /etc/motd for change was repaired";
+}
+body changes my_fim
+# @brief Detect file content changes using sha256
+# and report the diff to CFEngine Enterprise
+{
+      hash           => "sha256";
+      report_changes => "all";
+      report_diffs   => "true";
+      update_hashes  => "yes";
+}

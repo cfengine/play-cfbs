@@ -837,6 +837,17 @@
         "policy_files services/cfbs/inventory-unshadowed-users/",
         "bundles inventory_unshadowed_users:main"
       ]
+    },
+    {
+      "name": "./example-file-integrity-module.cf",
+      "description": "Local policy file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./example-file-integrity-module.cf services/cfbs/example-file-integrity-module.cf",
+        "policy_files services/cfbs/example-file-integrity-module.cf",
+        "bundles example_fim"
+      ]
     }
   ],
   "git": true
