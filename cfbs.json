@@ -848,6 +848,22 @@
         "policy_files services/cfbs/example-file-integrity-module.cf",
         "bundles example_fim"
       ]
+    },
+    {
+      "name": "maintainers-in-motd",
+      "version": "0.0.1",
+      "description": "Add maintainer and purpose information from CMDB to /etc/motd",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/craigcomstock",
+      "commit": "89629690fe265556e1ae4eb9127e42fb9525c9f5",
+      "subdirectory": "security/maintainers-in-motd",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./maintainers-in-motd.cf services/cfbs/modules/maintainers-in-motd.cf",
+        "policy_files services/cfbs/modules/maintainers-in-motd.cf",
+        "bundles maintainers_in_motd"
+      ]
     }
   ],
   "git": true
