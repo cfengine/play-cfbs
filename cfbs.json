@@ -759,6 +759,21 @@
         "bundles cron_access",
         "policy_files services/cfbs/modules/cron-access/cron-access.cf"
       ]
+    },
+    {
+      "name": "inventory-openssl-versions",
+      "description": "Adds an inventory attribute containing all versions of OpenSSL found on the system.",
+      "tags": ["inventory", "security", "experimental"],
+      "repo": "https://github.com/olehermanse/cfengine-inventory-openssl-versions",
+      "by": "https://github.com/olehermanse",
+      "version": "0.2.0",
+      "commit": "5c22bfafb037fa96ab59574ef0da3b161167d883",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy inventory-openssl-versions.cf services/cfbs/modules/inventory-openssl-versions/inventory-openssl-versions.cf",
+        "policy_files services/cfbs/modules/inventory-openssl-versions/inventory-openssl-versions.cf",
+        "bundles inventory_openssl_versions:inventory_openssl_versions"
+      ]
     }
   ],
   "git": true
