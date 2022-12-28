@@ -727,6 +727,22 @@
         "policy_files services/cfbs/modules/uninstall-xinetd/uninstall-xinetd.cf",
         "bundles uninstall_xinetd"
       ]
+    },
+    {
+      "name": "install-aide",
+      "description": "Ensures the AIDE (Advanced Intrusion Detection Environment) software is installed.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "0.0.1",
+      "commit": "9bb26f99ba377f85f7211d05bf54e71d89711d1a",
+      "subdirectory": "security/install-aide",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy install-aide.cf services/cfbs/modules/install-aide/install-aide.cf",
+        "bundles install_aide",
+        "policy_files services/cfbs/modules/install-aide/install-aide.cf"
+      ]
     }
   ],
   "git": true
