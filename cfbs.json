@@ -565,6 +565,22 @@
         "bundles enable_aslr",
         "policy_files services/cfbs/modules/enable-aslr/enable-aslr.cf"
       ]
+    },
+    {
+      "name": "uninstall-apache",
+      "version": "1.0.0",
+      "description": "Ensures the apache package is not installed.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "commit": "6805332200dd48db54c61178c90bf2374c5d8fca",
+      "subdirectory": "security/uninstall-apache",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy uninstall-apache.cf services/cfbs/modules/uninstall-apache/uninstall-apache.cf",
+        "policy_files services/cfbs/modules/uninstall-apache/uninstall-apache.cf",
+        "bundles uninstall_apache"
+      ]
     }
   ],
   "git": true
