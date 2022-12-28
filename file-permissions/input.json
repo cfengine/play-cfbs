@@ -1,0 +1,39 @@
+[
+  {
+    "bundle": "file_permissions",
+    "label": "Files",
+    "namespace": "file_permissions",
+    "response": [
+      {
+        "mode": "644",
+        "path": "/etc/hosts",
+        "why": "Any user should be able to resolve names from /etc/hosts"
+      }
+    ],
+    "subtype": [
+      {
+        "key": "path",
+        "label": "Path",
+        "question": "Path to file",
+        "type": "string"
+      },
+      {
+        "default": "600",
+        "key": "mode",
+        "label": "Permissions",
+        "question": "Permission bits (octal)",
+        "type": "string"
+      },
+      {
+        "default": "Unknown",
+        "key": "why",
+        "label": "Why",
+        "question": "Why do these permissions matter?",
+        "type": "string"
+      }
+    ],
+    "type": "list",
+    "variable": "files",
+    "while": "Manage permission of another file?"
+  }
+]
