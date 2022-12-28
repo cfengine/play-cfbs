@@ -1,7 +1,7 @@
 {
   "classes": {
    "trigger_upgrade": [
-     "cfengine_3_20_(?!0$)\\d+"
+     "cfengine_3_(?!20$)\\d+"
    ]
   }
 }
