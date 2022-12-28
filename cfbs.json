@@ -774,6 +774,54 @@
         "policy_files services/cfbs/modules/inventory-openssl-versions/inventory-openssl-versions.cf",
         "bundles inventory_openssl_versions:inventory_openssl_versions"
       ]
+    },
+    {
+      "name": "file-permissions",
+      "description": "Manages file permissions, allowing you to specify permission bits for different paths.",
+      "tags": ["management"],
+      "repo": "https://github.com/nickanderson/cfengine-file-permissions",
+      "by": "https://github.com/nickanderson",
+      "version": "0.2.0",
+      "commit": "b307d1b2b002dc7e32d29702f3fddc6d4832c9ec",
+      "input": [
+        {
+          "type": "list",
+          "variable": "files",
+          "namespace": "file_permissions",
+          "bundle": "file_permissions",
+          "label": "Files",
+          "subtype": [
+            {
+              "key": "path",
+              "type": "string",
+              "label": "Path",
+              "question": "Path to file"
+            },
+            {
+              "key": "mode",
+              "type": "string",
+              "label": "Permissions",
+              "question": "Permission bits (octal)",
+              "default": "600"
+            },
+            {
+              "key": "why",
+              "type": "string",
+              "label": "Why",
+              "question": "Why do these permissions matter?",
+              "default": "Unknown"
+            }
+          ],
+          "while": "Manage permission of another file?"
+        }
+      ],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy file-permissions.cf services/cfbs/modules/file-permissions/file-permissions.cf",
+        "input file-permissions/input.json def.json",
+        "bundles file_permissions:file_permissions",
+        "policy_files services/cfbs/modules/file-permissions/file-permissions.cf"
+      ]
     }
   ],
   "git": true
