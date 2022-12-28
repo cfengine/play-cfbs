@@ -743,6 +743,22 @@
         "bundles install_aide",
         "policy_files services/cfbs/modules/install-aide/install-aide.cf"
       ]
+    },
+    {
+      "name": "cron-access",
+      "description": "Limits access to cron-related files in /etc by setting user, group, and permission bits.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "0.0.1",
+      "commit": "e5b64e3bf390b3b27e0efce29af9a1c354ed54f1",
+      "subdirectory": "security/cron-access",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy cron-access.cf services/cfbs/modules/cron-access/cron-access.cf",
+        "bundles cron_access",
+        "policy_files services/cfbs/modules/cron-access/cron-access.cf"
+      ]
     }
   ],
   "git": true
