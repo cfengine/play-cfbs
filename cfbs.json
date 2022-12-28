@@ -711,6 +711,22 @@
         "policy_files services/cfbs/modules/uninstall-bind/uninstall-bind.cf",
         "bundles uninstall_bind"
       ]
+    },
+    {
+      "name": "uninstall-xinetd",
+      "description": "Ensures the xinetd package is not installed.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "1.0.0",
+      "commit": "6805332200dd48db54c61178c90bf2374c5d8fca",
+      "subdirectory": "security/uninstall-xinetd",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy uninstall-xinetd.cf services/cfbs/modules/uninstall-xinetd/uninstall-xinetd.cf",
+        "policy_files services/cfbs/modules/uninstall-xinetd/uninstall-xinetd.cf",
+        "bundles uninstall_xinetd"
+      ]
     }
   ],
   "git": true
