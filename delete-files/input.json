@@ -1,0 +1,31 @@
+[
+  {
+    "bundle": "delete_files",
+    "label": "Files",
+    "namespace": "delete_files",
+    "response": [
+      {
+        "path": "/tmp/virus",
+        "why": "if this common virus is present, delete it!"
+      }
+    ],
+    "subtype": [
+      {
+        "key": "path",
+        "label": "Path",
+        "question": "Path to file",
+        "type": "string"
+      },
+      {
+        "default": "Unknown",
+        "key": "why",
+        "label": "Why",
+        "question": "Why should this file be deleted?",
+        "type": "string"
+      }
+    ],
+    "type": "list",
+    "variable": "files",
+    "while": "Specify another file you want deleted on your hosts?"
+  }
+]
