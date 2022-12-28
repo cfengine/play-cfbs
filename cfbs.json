@@ -695,6 +695,22 @@
         "policy_files services/cfbs/modules/uninstall-dhcp/uninstall-dhcp.cf",
         "bundles uninstall_dhcp"
       ]
+    },
+    {
+      "name": "uninstall-bind",
+      "description": "Ensures the bind package is not installed.",
+      "tags": ["supported", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/olehermanse",
+      "version": "1.0.1",
+      "commit": "306181850201c60f4b7d379e80a8b1e552bb7f0f",
+      "subdirectory": "security/uninstall-bind",
+      "added_by": "cfbs add",
+      "steps": [
+        "copy uninstall-bind.cf services/cfbs/modules/uninstall-bind/uninstall-bind.cf",
+        "policy_files services/cfbs/modules/uninstall-bind/uninstall-bind.cf",
+        "bundles uninstall_bind"
+      ]
     }
   ],
   "git": true
