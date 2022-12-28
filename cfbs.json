@@ -820,6 +820,23 @@
       "steps": [
         "copy ./upgrade_all_packages.cf services/autorun/upgrade_all_packages.cf"
       ]
+    },
+    {
+      "name": "inventory-unshadowed-users",
+      "description": "Adds reporting data (inventory) on local users in /etc/passwd not using /etc/shadow for their password.",
+      "tags": ["supported", "inventory", "security", "compliance"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/nickanderson",
+      "version": "1.0.2",
+      "commit": "cff9325f0b12e914fead75c7b30092b0d91cee64",
+      "subdirectory": "security/inventory-unshadowed-users",
+      "dependencies": ["library-parsed-local-users"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy policy/main.cf services/cfbs/inventory-unshadowed-users/",
+        "policy_files services/cfbs/inventory-unshadowed-users/",
+        "bundles inventory_unshadowed_users:main"
+      ]
     }
   ],
   "git": true
