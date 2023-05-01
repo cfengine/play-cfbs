@@ -7,5 +7,5 @@ jobs:
     steps:
       - name: show github context contents
         run: echo '${{ tojson(github) }}'
-      - name: hi
-        run: echo "hi"
+      - name: test 1 2
+        run: echo "test-pr-2"
