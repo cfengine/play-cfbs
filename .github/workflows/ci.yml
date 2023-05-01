@@ -8,4 +8,4 @@ jobs:
       - name: show github context contents
         run: echo '${{ tojson(github) }}'
       - name: test 1 2
-        run: echo '${{undefinedvar || github.base_ref || github.ref}}'
+        run: echo '${{action_ref || github.base_ref || github.ref}}'
