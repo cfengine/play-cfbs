@@ -9,3 +9,8 @@ jobs:
         run: echo '${{ tojson(github) }}'
       - name: test 1 2
         run: echo '${{github.action_ref || github.base_ref || github.ref}}'
+      - name: each one
+        run: |
+          echo 'github.action_ref is ${{github.action_ref}}'
+          echo 'github.base_ref is ${{github.base_ref}}'
+          echo 'github.ref is ${{github.ref}}'
