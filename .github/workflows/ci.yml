@@ -13,4 +13,5 @@ jobs:
         run: |
           echo 'github.action_ref is ${{github.action_ref}}'
           echo 'github.base_ref is ${{github.base_ref}}'
+          echo 'github.ref_name is ${{github.ref_name}}'
           echo 'github.ref is ${{github.ref}}'
