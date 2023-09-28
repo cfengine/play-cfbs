@@ -9,6 +9,7 @@ bundle agent docker_inventory
         meta => { "inventory", "attribute_name=Docker ${status_list} Count" };
       "images_string" string => execresult(`${docker} images --format "{{.Repository}}:{{.Tag}}"`, "noshell", "stdout");
       "images_list" slist => splitstring("${images_string}", "\n", "inf");
+      # use an associative array to avoid large amounts of data being truncated when reporting is collected
       "images_array[${images_list}]" string => "${images_list}",
         meta => { "inventory", "attribute_name=Docker Image List" };
 
