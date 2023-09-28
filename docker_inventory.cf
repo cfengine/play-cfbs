@@ -1,5 +1,11 @@
 bundle agent docker_inventory
 {
+  vars:
+    "docker" string => "/usr/local/bin/docker";
+  classes:
+    "have_docker" expression => fileexists("${docker}"),
+      scope => "namespace",
+      meta => { "inventory", "attribute_name=Docker Installed" };
   reports:
     any::
       "hi from ${this.bundle}";
