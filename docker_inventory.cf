@@ -1,75 +1,11 @@
 bundle agent docker_inventory
 {
-  classes:
-    # https://docs.cfengine.com/docs/3.21/examples-tutorials-custom_inventory.html
-    # Simply add the inventory and attribute_name= tags to any variable or namespace scoped classes.
-    "have_docker" expression => fileexists("${docker}"),
-      scope => "namespace",
-      meta => { "inventory", "attribute_name=Docker Installed" };
-
-  vars:
-    any::
-      "docker" string => "/usr/local/bin/docker"; # todo discover this more dynamically or per-platform
-
-    have_docker::
-      "status_list" slist => { "created", "restarting", "running", "removing", "pause", "exited", "dead" };
-      "status_count[${status_list}]" int => int(execresult(`${docker} ps -a --filter "status=${status_list}" --format "{{.Names}}" | wc -l`, "useshell", "stdout")),
-        meta => { "inventory", "attribute_name=Docker ${status_list} Count" };
-      "running_string" string => execresult(`${docker} ps -a --filter "status=running" --format "{{.Names}}"`, "noshell", "stdout");
-      "running_names" slist => splitstring("${running_string}", "\n", "inf"),
-        meta => { "inventory", "attribute_name=Docker Running Names" };
-      "dangling_count" int => int(execresult(`${docker} images --filter "dangling=true" --format "{{.Repository}}" | wc -l`, "useshell", "stdout")),
-        meta => { "inventory", "attribute_name=Docker Dangling Image Count" };
-      "images_string" string => execresult(`${docker} images --format "{{.Repository}}:{{.Tag}}"`, "noshell", "stdout");
-      "images_list" slist => splitstring("${images_string}", "\n", "inf"),
-        meta => { "inventory", "attribute_name=Docker Image List" };
-
   reports:
     any::
-      "Hello from ${this.bundle}";
-
-    have_docker::
-      "docker containers ${status_list}: ${status_count[${status_list}]}";
-      "running_names: ${with}" with => storejson(running_names);
-      "dangling_count: ${dangling_count}";
-      "images_list: ${with}" with => storejson(images_list);
+      "hi from ${this.bundle}";
 }
 
-bundle agent main
+bundle agent __main__
 {
   methods: "docker_inventory";
 }
-
-body contain useshell
-{
-  useshell => "useshell";
-}
-
-body classes repaired(c)
-{
-  scope => "namespace";
-  promise_repaired => { "$(c)" };
-}
-#
-# {"Command":"\"/usr/local/bin/entr…\"","CreatedAt":"2023-07-07 11:45:05 -0500 CDT","ID":"830733feabcb","Image":"gcr.io/k8s-minikube/kicbase:v0.0.39","Labels":"desktop.docker.io/ports/22/tcp=127.0.0.1:0,desktop.docker.io/ports/2376/tcp=127.0.0.1:0,desktop.docker.io/ports/32443/tcp=127.0.0.1:0,role.minikube.sigs.k8s.io=,created_by.minikube.sigs.k8s.io=true,desktop.docker.io/ports/5000/tcp=127.0.0.1:0,desktop.docker.io/ports/8443/tcp=127.0.0.1:0,mode.minikube.sigs.k8s.io=minikube,name.minikube.sigs.k8s.io=minikube,org.opencontainers.image.ref.name=ubuntu,org.opencontainers.image.version=20.04","LocalVolumes":"1","Mounts":"/lib/modules,minikube","Names":"minikube","Networks":"minikube","Ports":"","RunningFor":"2 months ago","Size":"3.09MB (virtual 1.06GB)","State":"exited","Status":"Exited (130) 7 weeks ago"}
-# Craigs-MacBook-Pro:play-cfbs craig$ docker ps -a --format "table {{.ID}},{{.Image}},{{.Status}},{{.Names}}" 
-# https://docs.docker.com/config/formatting/
-# fields are here: https://docs.docker.com/engine/reference/commandline/ps/
-# maybe do docker inspect to get further details about each container and such, maybe get stale ps and images
-#    "tmp_ps" string => "/tmp/docker-ps.json";
-#    "tmp_images" string => "/tmp/docker-images.json";
-#    "ps_string" string => readfile("${tmp_ps}"),
-#      if => "ps_saved";
-#    "ps_lines" slist => splitstring("$(ps_string)", "$(const.nl)", inf);
-#    "images_string" string => readfile("${tmp_images}"),
-#      if => "images_saved";
-#  commands:
-#    "${docker} ps -a --format json > ${tmp_ps}"
-#      classes => repaired("ps_saved"),
-#      contain => useshell;
-#    "${docker} images -a --format json > ${tmp_images}"
-#      classes => repaired("images_saved"),
-#      contain => useshell;
-#    ps_saved:: "ps_saved is defined";
-#    images_saved:: "images_saved is defined";
-#docker image ls --format "{{.ID}},{{.Repository}},{{.Tag}},{{.Size}}" | sort -k 3 -h
