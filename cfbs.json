@@ -73,6 +73,17 @@
         "policy_files services/cfbs/docker_inventory.cf",
         "bundles docker_inventory"
       ]
+    },
+    {
+      "name": "./test_inventory.cf",
+      "description": "Local policy file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ./test_inventory.cf services/cfbs/test_inventory.cf",
+        "policy_files services/cfbs/test_inventory.cf",
+        "bundles test_inventory"
+      ]
     }
   ],
   "git": true
