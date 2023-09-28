@@ -8,7 +8,8 @@ bundle agent docker_inventory
       "status_count[${status_list}]" int => int(execresult(`${docker} ps -a --filter "status=${status_list}" --format "{{.Names}}" | wc -l`, "useshell", "stdout")),
         meta => { "inventory", "attribute_name=Docker ${status_list} Count" };
       "images_string" string => execresult(`${docker} images --format "{{.Repository}}:{{.Tag}}"`, "noshell", "stdout");
-      "images_list" slist => splitstring("${images_string}", "\n", "inf"),
+      "images_list" slist => splitstring("${images_string}", "\n", "inf");
+      "images_array[${images_list}]" string => "${images_list}",
         meta => { "inventory", "attribute_name=Docker Image List" };
 
   classes:
@@ -19,7 +20,7 @@ bundle agent docker_inventory
 
   reports:
     have_docker::
-      "images_list: ${with}" with => storejson(images_list);
+      "images_array: ${with}" with => storejson(images_array);
       "docker containers ${status_list}: ${status_count[${status_list}]}";
     any::
       "hi from ${this.bundle}";
