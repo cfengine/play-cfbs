@@ -1,12 +1,21 @@
 bundle agent docker_inventory
 {
   vars:
-    "docker" string => "/usr/local/bin/docker";
+    any::
+      "docker" string => "/usr/local/bin/docker";
+    have_docker::
+      "status_list" slist => { "created", "exited", "dead" };
+      "status_count[${status_list}]" int => int(execresult(`${docker} ps -a --filter "status=${status_list}" --format "{{.Names}}" | wc -l`, "useshell", "stdout")),
+        meta => { "inventory", "attribute_name=Docker ${status_list} Count" };
   classes:
     "have_docker" expression => fileexists("${docker}"),
       scope => "namespace",
       meta => { "inventory", "attribute_name=Docker Installed" };
+# alt: tag with report
+
   reports:
+    have_docker::
+      "docker containers ${status_list}: ${status_count[${status_list}]}";
     any::
       "hi from ${this.bundle}";
 }
