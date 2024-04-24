@@ -27,6 +27,13 @@
         "policy_files services/cfbs/simple/",
         "bundles simple"
       ]
+    },
+    {
+      "name": "./def.json",
+      "description": "Local augments file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": ["json ./def.json def.json"]
     }
   ],
   "git": true

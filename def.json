@@ -1,0 +1,9 @@
+{
+
+  "classes": {
+    "cfengine_internal_masterfiles_update": [ "am_policy_hub::" ]
+  },
+  "vars": {
+    "control_common_update_bundlesequence_end": [ "cfe_internal_update_from_repository" ]
+  }
+}
