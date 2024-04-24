@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -ex
+/var/cfengine/bin/cf-agent -KIf update.cf
+/var/cfengine/bin/cf-agent -KI
