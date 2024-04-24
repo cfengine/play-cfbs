@@ -1,70 +1,40 @@
 #!/usr/bin/env bash
 set -ex
 
-echo -n "Ready to cleanup cf-remote and uninstall everything..."
-read -r wait
+vm up
+vm ssh-config
 
-cf-remote destroy --all
+# setup cf-remote names
+cf-remote destroy --all # start over each time
+cf-remote save --role hub --name server --hosts vagrant@ubuntu-20
+cf-remote save --role hub --name hub --hosts vagrant@ubuntu-22
+cf-remote save --role clients --name clients --hosts vagrant@debian-10,vagrant@centos-7
+cf-remote save --role clients --name all --hosts vagrant@ubuntu-20,vagrant@ubuntu-22,vagrant@debian-10,vagrant@centos-7
 
-policy_server=ubuntu-20
-policy_server_ip=192.168.56.20
+# uninstall
+cf-remote uninstall -H all
 
-cf-remote save --role hub --name $policy_server --hosts vagrant@$policy_server
-cf-remote sudo -H $policy_server "apt install -y python3-pip; pip3 install cfbs"
+# install community, bootstrap
+cf-remote sudo -H server "apt install -y python3-pip; pip3 install cfbs"
+cf-remote install --edition community --clients server --bootstrap 192.168.56.20
+cf-remote sudo -H server "curl --silent https://raw.githubusercontent.com/cfengine/core/master/contrib/masterfiles-stage/install-masterfiles-stage.sh --remote-name"
+cf-remote sudo -H server "chmod +x install-masterfiles-stage.sh"
+cf-remote sudo -H server "./install-masterfiles-stage.sh"
+cf-remote scp -H server params.sh 
+cf-remote sudo -H server "cp /home/vagrant/params.sh /opt/cfengine/dc-scripts/"
+cf-remote sudo -H server "/var/cfengine/httpd/htdocs/api/dc-scripts/masterfiles-stage.sh --DEBUG"
+cf-remote scp -H server cfe 
+cf-remote sudo -H server "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
+cf-remote sudo -H server cfe
+cf-remote install --edition community --clients clients --bootstrap 192.168.56.20
 
-clients="debian-10 centos-7"
-for client in $clients; do
-  cf-remote save --role client --name $client --hosts vagrant@$client
-done
+# play around for a bit, setup the secret with cf-secret
+# cf-secret encrypt -H 192.168.56.10,192.168.56.7,192.168.56.20 -o /home/vagrant/secret.dat -
+ssh ubuntu-20 sudo chown vagrant /home/vagrant/secret.dat
+scp ubuntu-20:secret.dat simple/
+git add simple/secret.dat
+git commit -m 'updated secret'
+git push
 
-hosts="$policy_server $clients"
-for host in $hosts; do
-  cf-remote uninstall -H $host
-done
+cf-remote sudo -H server,clients cfe
 
-echo -n "Done uninstalling. Next is community install..."
-read -r wait
-
-cf-remote install --edition community --clients $policy_server --bootstrap $policy_server_ip
-cf-remote sudo -H $policy_server "curl --silent https://raw.githubusercontent.com/cfengine/core/master/contrib/masterfiles-stage/install-masterfiles-stage.sh --remote-name"
-cf-remote sudo -H $policy_server "chmod +x install-masterfiles-stage.sh"
-cf-remote sudo -H $policy_server "./install-masterfiles-stage.sh"
-cf-remote scp -H $policy_server params.sh 
-cf-remote sudo -H $policy_server "cp /home/vagrant/params.sh /opt/cfengine/dc-scripts/"
-cf-remote sudo -H $policy_server "/var/cfengine/httpd/htdocs/api/dc-scripts/masterfiles-stage.sh --DEBUG"
-cf-remote scp -H $policy_server cfe 
-cf-remote sudo -H $policy_server "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
-cf-remote sudo -H $policy_server cfe
-
-for client in $clients; do
-  cf-remote install --edition community --clients $client --bootstrap $policy_server_ip
-  cf-remote scp -H $client cfe
-  cf-remote sudo -H $client "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
-done
-
-echo -n "Community installed and bootstrapped. Play around a bit with the Policy. Next is install Enterprise Hub..."
-read -r wait
-
-hub=ubuntu-22
-hub_ip=192.168.56.22
-cf-remote save --role hub --name $hub --hosts vagrant@$hub
-cf-remote install --hub $hub --bootstrap $hub_ip
-
-echo -n "Enterprise hub installed. Go to Mission Portal and configure VCS settings... https://192.168.56.202/settings/vcs"
-read -r wait
-
-cf-remote sudo -H $policy_server "/var/cfengine/httpd/htdocs/api/dc-scripts/masterfiles-stage.sh --DEBUG"
-cf-remote scp -H $hub cfe
-cf-remote sudo -H $hub "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
-cf-remote sudo -H $hub cfe
-
-echo -n "Enterprise hub should have our policy now. Next is to uninstall community, install enterprise, bootstrap clients..."
-read -r wait
-
-for client in $clients; do
-  cf-remote uninstall -H $client
-  cf-remote install --clients $client --bootstrap $hub_ip
-  cf-remote sudo -H $client cfe
-done
-
-echo "That's it. Play around. Make sure things look OK."
