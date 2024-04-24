@@ -9,6 +9,9 @@ bundle agent simple
   files:
     "$(host_data_dir)/." # trailing /. is a directory
       create => "true";
+    policy_server::
+      "/usr/bin/cfeinventory.sh"
+        copy_from => local_dcp("$(this.promise_dirname)/inventory.sh");
 
   commands:
       "$(default:sys.bindir)/cf-support -y"
@@ -16,7 +19,7 @@ bundle agent simple
         contain => in_client_data_dir;
 
     policy_server::
-      "$(this.promise_dirname)/inventory.sh";
+      "/usr/bin/cfeinventory.sh";
 
 # cf-secret
   reports: "The secret is: $(with)" with => execresult("$(sys.cf_secret) decrypt -o - $(this.promise_dirname)/secret.dat", "useshell", "stdout");
