@@ -16,17 +16,6 @@
         "run EXPLICIT_VERSION=3.21.4 EXPLICIT_RELEASE=1 ./prepare.sh -y",
         "copy ./ ./"
       ]
-    },
-    {
-      "name": "./simple.cf",
-      "description": "Local policy file added using cfbs command line",
-      "tags": ["local"],
-      "added_by": "cfbs add",
-      "steps": [
-        "copy ./simple.cf services/cfbs/simple.cf",
-        "policy_files services/cfbs/simple.cf",
-        "bundles simple"
-      ]
     }
   ],
   "git": true
