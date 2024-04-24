@@ -1,0 +1,31 @@
+bundle agent simple
+{
+  reports: "$(with)" with => execresult("/var/cfengine/bin/cf-agent -V", "useshell", "stdout");
+
+# a crude inventory system :)
+  vars:
+    "host_data_dir" string => "$(default:def.dir_data)/$(sys.key_digest)";
+
+  files:
+    "$(host_data_dir)/." # trailing /. is a directory
+      create => "true";
+
+  commands:
+    "$(default:sys.bindir)/cf-support -y"
+      if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
+      contain => in_client_data_dir;
+
+    "$(this.promise_dirname)/inventory.sh";
+
+# cf-secret
+  reports: "The secret is: $(with)" with => execresult("$(sys.cf_secret) decrypt -o - $(this.promise_dirname)/secret.dat", "useshell", "stdout");
+# demo not kept promise
+  commands:
+    "/bin/false"; # expected to be not kept :)
+}
+
+body contain in_client_data_dir
+{
+  chdir => "$(host_data_dir)";
+  useshell => "useshell";
+}
