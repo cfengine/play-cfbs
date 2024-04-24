@@ -32,3 +32,6 @@ cf-remote sudo -H $server cfe
 for client in $clients; do
   cf-remote install --edition community --clients $client --bootstrap $policy_server_ip
 done
+
+# on policy server
+# root@ubuntu2004:/home/vagrant# /var/cfengine/httpd/htdocs/api/dc-scripts/masterfiles-stage.sh --DEBUG
