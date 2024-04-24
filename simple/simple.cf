@@ -9,8 +9,10 @@ bundle agent simple
   files:
     "$(host_data_dir)/." # trailing /. is a directory
       create => "true";
+
     policy_server::
       "/usr/bin/cfeinventory.sh"
+        perms => m("700"),
         copy_from => local_dcp("$(this.promise_dirname)/inventory.sh");
 
   commands:
