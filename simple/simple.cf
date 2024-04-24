@@ -11,11 +11,12 @@ bundle agent simple
       create => "true";
 
   commands:
-    "$(default:sys.bindir)/cf-support -y"
-      if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
-      contain => in_client_data_dir;
+      "$(default:sys.bindir)/cf-support -y"
+        if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
+        contain => in_client_data_dir;
 
-    "$(this.promise_dirname)/inventory.sh";
+    policy_server::
+      "$(this.promise_dirname)/inventory.sh";
 
 # cf-secret
   reports: "The secret is: $(with)" with => execresult("$(sys.cf_secret) decrypt -o - $(this.promise_dirname)/secret.dat", "useshell", "stdout");
