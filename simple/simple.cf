@@ -20,9 +20,9 @@ bundle agent simple
        copy_from => local_dcp("$(this.promise_dirname)/encrypt-demo.sh");
 
   commands:
-      "$(default:sys.bindir)/cf-support -y"
-        if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
-        contain => in_client_data_dir;
+#      "$(default:sys.bindir)/cf-support -y"
+#        if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
+#        contain => in_client_data_dir;
 
     policy_server::
       "/usr/bin/cfeinventory.sh";
