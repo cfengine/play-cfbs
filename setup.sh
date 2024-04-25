@@ -61,16 +61,6 @@ cf-remote uninstall -H clients
 cf-remote install --clients clients --bootstrap 192.168.56.22
 cf-remote sudo -H clients cfe
 
-wait "install enterprise hub on ubuntu-22..."
-cf-remote install --hub hub --bootstrap 192.168.56.22
-
-echo "https://192.168.56.22/settings/vcs enter VCS type: GIT+CFBS, URL: https://github.com/craigcomstock/play-cfbs and refspec: simple"
-echo "add class to hub in MP UI: default:cfengine_internal_masterfiles_update"
-wait "login to mission portal and setup VCS..."
-cf-remote scp -H hub cfe 
-cf-remote sudo -H hub "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
-cf-remote sudo -H hub cfe
-
 wait "re-encrypt secret for enterprise hub and clients..."
 ssh ubuntu-22 sudo chown vagrant /home/vagrant/secret.dat
 scp ubuntu-22:secret.dat simple/
@@ -80,7 +70,7 @@ git push
 cf-remote sudo -H hub "/var/cfengine/bin/cf-agent -K"
 cf-remote sudo -H clients "/var/cfengine/bin/cf-agent -K"
 
-# debugging
+wait "debugging..."
 cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.10 --query rebase"
 cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.10 --query delta"
 cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.7 --query rebase"
