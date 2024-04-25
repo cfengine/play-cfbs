@@ -1,4 +1,4 @@
 set -ex
-host_ips=$(cf-key -s | grep Incoming | awk '{print $2}' | paste -s -d,)
+host_ips=$(cf-key -s | grep MD5 | sort -u | awk '{print $2}' | paste -s -d,)
 cf-secret encrypt -H $host_ips -o /home/vagrant/secret.dat -
 chown vagrant /home/vagrant/secret.dat
