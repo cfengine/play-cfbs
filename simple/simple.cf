@@ -18,6 +18,7 @@ bundle agent simple
      "/usr/bin/encrypt-demo.sh"
        perms => m("700"),
        copy_from => local_dcp("$(this.promise_dirname)/encrypt-demo.sh");
+
   commands:
       "$(default:sys.bindir)/cf-support -y"
         if => isgreaterthan(1,length(lsdir("$(host_data_dir)", "^(?!(\.$|\.\.$)).*", true))),
