@@ -22,6 +22,8 @@ wait "uninstall..."
 cf-remote uninstall -H all
 
 wait "install community, bootstrap..."
+now=$(date +%s)
+cf-remote sudo -H all "date --set=@$now"
 cf-remote sudo -H server "apt install -y python3-pip; pip3 install cfbs"
 cf-remote install --edition community --clients server --bootstrap 192.168.56.20
 cf-remote sudo -H server "curl --silent https://raw.githubusercontent.com/cfengine/core/master/contrib/masterfiles-stage/install-masterfiles-stage.sh --remote-name"
@@ -48,17 +50,25 @@ cf-remote sudo -H server,clients "/var/cfengine/bin/cf-agent -K"
 wait "install enterprise hub on ubuntu-22..."
 cf-remote install --hub hub --bootstrap 192.168.56.22
 
+echo "https://192.168.56.22/settings/vcs enter VCS type: GIT+CFBS, URL: https://github.com/craigcomstock/play-cfbs and refspec: simple"
+echo "add class to hub in MP UI: default:cfengine_internal_masterfiles_update"
 wait "login to mission portal and setup VCS..."
 cf-remote scp -H hub cfe 
 cf-remote sudo -H hub "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
 cf-remote sudo -H hub cfe
 
-wait "upgrade debian-10 to enterprise..."
-cf-remote uninstall -H debian-10
-cf-remote install --clients debian-10 --bootstrap 192.168.56.22
-cf-remote sudo -H debian-10 cfe
+wait "upgrade clients to enterprise..."
+cf-remote uninstall -H clients
+cf-remote install --clients clients --bootstrap 192.168.56.22
+cf-remote sudo -H clients cfe
 
-wait "upgrade centos-7 to enterprise and rebootstrap..."
-cf-remote uninstall -H centos-7
-cf-remote install --clients centos-7 --bootstrap 192.168.56.7
-cf-remote sudo -H centos-7 cfe
+# debugging
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.10 --query rebase"
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.10 --query delta"
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.7 --query rebase"
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.7 --query delta"
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.22 --query rebase"
+cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.22 --query delta"
+
+cf-remote sudo -H hub cfe
+cf-remote sudo -H clients cfe
