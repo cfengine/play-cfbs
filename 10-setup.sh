@@ -8,10 +8,10 @@ function wait
   read -r _r
   set -x
 }
+wait "setup vms and cf-remote names..."
 vm up
 vm ssh-config
 
-wait "setup cf-remote names..."
 cf-remote destroy --all # start over each time
 cf-remote save --role hub --name server --hosts vagrant@ubuntu-20
 cf-remote save --role hub --name hub --hosts vagrant@ubuntu-22
