@@ -38,14 +38,13 @@ cf-remote sudo -H server cfe
 cf-remote install --edition community --clients clients --bootstrap 192.168.56.20
 
 wait "play around for a bit, setup the secret with cf-secret. press enter to pull, commit and push the secret to the repo..."
-# cf-secret encrypt -H 192.168.56.10,192.168.56.7,192.168.56.20 -o /home/vagrant/secret.dat -
 ssh ubuntu-20 sudo chown vagrant /home/vagrant/secret.dat
 scp ubuntu-20:secret.dat simple/
 git add simple/secret.dat
 git commit -m 'updated secret'
 git push
-
-cf-remote sudo -H server,clients "/var/cfengine/bin/cf-agent -K"
+cf-remote sudo -H server "/var/cfengine/bin/cf-agent -K"
+cf-remote sudo -H clients "/var/cfengine/bin/cf-agent -K"
 
 wait "install enterprise hub on ubuntu-22..."
 cf-remote install --hub hub --bootstrap 192.168.56.22
@@ -61,6 +60,25 @@ wait "upgrade clients to enterprise..."
 cf-remote uninstall -H clients
 cf-remote install --clients clients --bootstrap 192.168.56.22
 cf-remote sudo -H clients cfe
+
+wait "install enterprise hub on ubuntu-22..."
+cf-remote install --hub hub --bootstrap 192.168.56.22
+
+echo "https://192.168.56.22/settings/vcs enter VCS type: GIT+CFBS, URL: https://github.com/craigcomstock/play-cfbs and refspec: simple"
+echo "add class to hub in MP UI: default:cfengine_internal_masterfiles_update"
+wait "login to mission portal and setup VCS..."
+cf-remote scp -H hub cfe 
+cf-remote sudo -H hub "cp /home/vagrant/cfe /usr/bin/cfe; chmod +x /usr/bin/cfe"
+cf-remote sudo -H hub cfe
+
+wait "re-encrypt secret for enterprise hub and clients..."
+ssh ubuntu-22 sudo chown vagrant /home/vagrant/secret.dat
+scp ubuntu-22:secret.dat simple/
+git add simple/secret.dat
+git commit -m 'updated secret'
+git push
+cf-remote sudo -H hub "/var/cfengine/bin/cf-agent -K"
+cf-remote sudo -H clients "/var/cfengine/bin/cf-agent -K"
 
 # debugging
 cf-remote sudo -H hub "/var/cfengine/bin/cf-hub --query-host 192.168.56.10 --query rebase"
