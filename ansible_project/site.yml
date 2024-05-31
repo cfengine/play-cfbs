@@ -1,5 +1,9 @@
 # site.yml
 ---
-- include: patch.yml
-- include: controller.yml
-- include: managed.yml
+- hosts: managed
+  tasks:
+    - ansible.builtin.debug:
+        msg: first play
+
+  roles:
+    - patch

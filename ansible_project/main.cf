@@ -1,21 +1,45 @@
-bundle agent run_ansible
+bundle agent ansible_main
 {
   vars:
-    "ansible_project" string => "$(sys.inputdir)/ansible_project";
+    "ansible_project" string => "$(sys.statedir)/ansible_project";
     "localhost_inventory" string => "$(sys.statedir)/localhost_inventory.ini";
+    "remote_ansible_project" string => string_replace("$(this.promise_dirname)", "inputs", "masterfiles");
+
+  classes:
+    # initial thought about how to translate CFEngine classification into Ansible groups classification for dynamic inventory
+    "managed"
+      meta => { "ansible_group" };
+    "webserver"
+      meta => { "ansible_group" };
+
+  vars:
+    "ansible_groups" slist => classesmatching(".*", "ansible_group");
+
+  reports:
+    "ansible_groups: ${ansible_groups}";
 
   files:
     "$(localhost_inventory)"
-      create => true,
-      content => "localhost",
+      create => "true",
+      content => string_mustache("[all:vars]
+ansible_connection=local
+{{#-top-}}[{{.}}]
+localhost
+{{/-top-}}",
+"ansible_groups"
+),
       classes => if_ok("localhost_inventory_created");
+
+    "$(ansible_project)"
+      copy_from => remote_cp($(remote_ansible_project), @(def.policy_servers)),
+      depth_search => recurse(inf);
 
   packages:
     "ansible"
       classes => if_ok("ansible_package_installed");
 
   ansible:
-    ansible_package_installed.local_inventory_created::
+    ansible_package_installed.localhost_inventory_created::
       "site.yml"
         playbook => "$(ansible_project)/site.yml",
         inventory => "$(localhost_inventory)";

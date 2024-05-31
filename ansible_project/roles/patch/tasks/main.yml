@@ -1,6 +1,6 @@
 # patch.yml
 ---
 - name: Perform full patching
-  package:
+  ansible.builtin.package:
     name: '*'
     state: latest

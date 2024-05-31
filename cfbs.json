@@ -53,7 +53,7 @@
       "steps": [
         "directory ./ services/cfbs/ansible_project/",
         "policy_files services/cfbs/ansible_project/",
-        "bundles run_ansible"
+        "bundles ansible_main"
       ]
     }
   ],
