@@ -1,0 +1,22 @@
+bundle agent run_ansible
+{
+  vars:
+    "ansible_project" string => "$(sys.inputdir)/ansible_project";
+    "localhost_inventory" string => "$(sys.statedir)/localhost_inventory.ini";
+
+  files:
+    "$(localhost_inventory)"
+      create => true,
+      content => "localhost",
+      classes => if_ok("localhost_inventory_created");
+
+  packages:
+    "ansible"
+      classes => if_ok("ansible_package_installed");
+
+  ansible:
+    ansible_package_installed.local_inventory_created::
+      "site.yml"
+        playbook => "$(ansible_project)/site.yml",
+        inventory => "$(localhost_inventory)";
+}

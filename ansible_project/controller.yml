@@ -1,0 +1,5 @@
+# controller.yml
+# control node and CFEngine hub hybrid
+---
+- name: Generate inventory from CFEngine
+  # todo

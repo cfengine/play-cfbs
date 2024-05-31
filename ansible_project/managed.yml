@@ -1,0 +1,3 @@
+# managed.yml
+--
+# todo: standard stuff every managed host gets like ntp, ssh rules, etc

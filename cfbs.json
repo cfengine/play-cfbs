@@ -44,6 +44,17 @@
         "copy ansible_promise.py modules/promises/",
         "append enable.cf services/init.cf"
       ]
+    },
+    {
+      "name": "./ansible_project/",
+      "description": "Local subdirectory added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "directory ./ services/cfbs/ansible_project/",
+        "policy_files services/cfbs/ansible_project/",
+        "bundles run_ansible"
+      ]
     }
   ],
   "git": true
