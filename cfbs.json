@@ -16,6 +16,34 @@
         "run EXPLICIT_VERSION=3.21.4 EXPLICIT_RELEASE=1 ./prepare.sh -y",
         "copy ./ ./"
       ]
+    },
+    {
+      "name": "library-for-promise-types-in-python",
+      "description": "Library enabling promise types implemented in python.",
+      "tags": ["supported", "library"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/cfengine",
+      "version": "0.2.2",
+      "commit": "813fb3d172c8db5642ef69cd5e8ef32b264ef275",
+      "subdirectory": "libraries/python",
+      "added_by": "promise-type-ansible",
+      "steps": ["copy cfengine.py modules/promises/"]
+    },
+    {
+      "name": "promise-type-ansible",
+      "description": "Promise type to run ansible playbooks.",
+      "tags": ["supported", "promise-type"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/tranchitella",
+      "version": "0.2.2",
+      "commit": "813fb3d172c8db5642ef69cd5e8ef32b264ef275",
+      "subdirectory": "promise-types/ansible",
+      "dependencies": ["library-for-promise-types-in-python"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy ansible_promise.py modules/promises/",
+        "append enable.cf services/init.cf"
+      ]
     }
   ],
   "git": true
