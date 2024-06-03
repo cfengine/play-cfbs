@@ -31,7 +31,7 @@ localhost
       classes => if_ok("localhost_inventory_created");
 
     "$(ansible_project)"
-      copy_from => remote_cp($(remote_ansible_project), @(def.policy_servers)),
+      copy_from => remote_dcp($(remote_ansible_project), @(def.policy_servers)),
       depth_search => recurse(inf);
 
   packages:
