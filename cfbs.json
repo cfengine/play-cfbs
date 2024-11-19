@@ -1,7 +1,8 @@
 {
-  "name": "Example project",
-  "type": "policy-set",
+  "name": "promise-type-docker-compose example",
   "description": "Example description",
+  "type": "policy-set",
+  "git": true,
   "build": [
     {
       "name": "masterfiles",
@@ -9,14 +10,52 @@
       "tags": ["supported", "base"],
       "repo": "https://github.com/cfengine/masterfiles",
       "by": "https://github.com/cfengine",
-      "version": "3.21.4",
-      "commit": "80374429aa8d9f1d5afe952727ae5659caf5e9ef",
+      "version": "3.24.0",
+      "commit": "d5d5c61942a97ec5e3fd35478e590c5943db5ac5",
       "added_by": "cfbs add",
       "steps": [
-        "run EXPLICIT_VERSION=3.21.4 EXPLICIT_RELEASE=1 ./prepare.sh -y",
+        "run EXPLICIT_VERSION=3.24.0 EXPLICIT_RELEASE=1 ./prepare.sh -y",
         "copy ./ ./"
       ]
+    },
+    {
+      "name": "library-for-promise-types-in-bash",
+      "description": "Library enabling promise types implemented in bash.",
+      "tags": ["supported", "library"],
+      "repo": "https://github.com/cfengine/modules",
+      "by": "https://github.com/Lex-2008",
+      "version": "0.1.2",
+      "commit": "99017f2d952c9e7fddaf3aac1be19061cb23c0d6",
+      "subdirectory": "libraries/bash",
+      "added_by": "promise-type-docker-compose",
+      "steps": ["copy cfengine.sh modules/promises/"]
+    },
+    {
+      "name": "promise-type-docker-compose",
+      "description": "Promise type to manage containers using docker compose",
+      "tags": ["promise-type", "docker", "experimental"],
+      "repo": "https://github.com/basvandervlies/scl_modules",
+      "by": "https://github.com/basvandervlies",
+      "version": "1.1.0",
+      "commit": "d3b3aed55b90df5bb33b652532f8d17cf74b5e96",
+      "subdirectory": "promise-types/docker_compose",
+      "dependencies": ["library-for-promise-types-in-bash"],
+      "added_by": "cfbs add",
+      "steps": [
+        "copy docker_compose.sh modules/promises/docker_compose.sh",
+        "append enable.cf services/init.cf"
+      ]
+    },
+    {
+      "name": "./composetest/",
+      "description": "Local subdirectory added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "directory ./ services/cfbs/composetest/",
+        "policy_files services/cfbs/composetest/",
+        "bundles composetest"
+      ]
     }
-  ],
-  "git": true
+  ]
 }

@@ -1,0 +1,6 @@
+bundle agent composetest
+{
+  docker_compose:
+    "${this.promise_dirname}/compose.yaml"
+      state => "start";
+}

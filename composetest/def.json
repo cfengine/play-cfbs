@@ -1,0 +1,8 @@
+{
+  "variables": {
+    "default:update_def.input_name_patterns_extra": {
+      "value": [ ".*\\Dockerfile" ],
+      "comment": "Dockerfile or *.Dockerfile should be copied so that promise-type-docker-compose works when referencing this.promise_dirname/*.yaml files."
+    }
+  }
+}
