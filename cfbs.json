@@ -1,7 +1,8 @@
 {
   "name": "Example project",
-  "type": "policy-set",
   "description": "Example description",
+  "type": "policy-set",
+  "git": true,
   "build": [
     {
       "name": "masterfiles",
@@ -23,11 +24,16 @@
       "tags": ["supported", "library"],
       "repo": "https://github.com/cfengine/modules",
       "by": "https://github.com/cfengine",
-      "version": "0.2.2",
-      "commit": "813fb3d172c8db5642ef69cd5e8ef32b264ef275",
+      "version": "0.3.0",
+      "commit": "258304b1783287d06d13e6851951c95f9b7facb2",
       "subdirectory": "libraries/python",
       "added_by": "promise-type-ansible",
-      "steps": ["copy cfengine.py modules/promises/"]
+      "steps": [
+        "copy cfengine_module_library.py modules/promises/cfengine_module_library.py",
+        "replace_version 2 0.0.0 modules/promises/cfengine_module_library.py",
+        "copy cfengine_module_library.py modules/promises/cfengine.py",
+        "replace_version 2 0.0.0 modules/promises/cfengine.py"
+      ]
     },
     {
       "name": "promise-type-ansible",
@@ -56,6 +62,5 @@
         "bundles ansible_main"
       ]
     }
-  ],
-  "git": true
+  ]
 }
