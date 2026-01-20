@@ -2,7 +2,7 @@
 ---
 - hosts: managed
   tasks:
-    - ansible.builtin.debug:
+    - debug:
         msg: first play
 
   roles:
