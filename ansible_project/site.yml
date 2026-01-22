@@ -12,6 +12,6 @@
   roles:
     - lockdown
 
-- hosts: all.!lockdown
+- hosts: managed.!lockdown
   roles:
     - notlockdown
