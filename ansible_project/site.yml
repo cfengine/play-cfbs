@@ -7,3 +7,7 @@
 
   roles:
     - patch
+
+- hosts: lockdown
+  roles:
+    - lockdown
