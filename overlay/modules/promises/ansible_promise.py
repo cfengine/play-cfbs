@@ -166,5 +166,5 @@ class AnsiblePromiseTypeModule(PromiseModule):
 
 
 if __name__ == "__main__":
-    AnsiblePromiseTypeModule().start()
     init_plugin_loader()
+    AnsiblePromiseTypeModule().start()
