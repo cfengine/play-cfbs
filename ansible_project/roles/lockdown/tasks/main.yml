@@ -1,7 +1,7 @@
 # lockdown.yml
 ---
-- name: Lock a host down, no ssh, no ports open, with firewalld
-  ansible.posix.firewalld:
+- name: lockdown
+  firewalld:
     service: 'ssh'
     state: disabled
     permanent: true
