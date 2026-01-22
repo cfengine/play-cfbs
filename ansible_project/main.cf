@@ -6,23 +6,22 @@ bundle agent ansible_main
     "remote_ansible_project" string => string_replace("$(this.promise_dirname)", "inputs", "masterfiles");
 
   classes:
-    # initial thought about how to translate CFEngine classification into Ansible groups classification for dynamic inventory
+    # initial thought about how to translate CFEngine classification into Ansible roles classification for dynamic inventory
     "managed"
-      meta => { "ansible_group" };
+      meta => { "ansible_role" };
     "webserver"
-      meta => { "ansible_group" };
-    "lockdown"
-      meta => { "ansible_group" };
+      meta => { "ansible_role" };
+    # for lockdown class I will add this in host info page e.g. CMDB: lockdown class with ansible_role tag
 
   vars:
-    "ansible_groups" slist => classesmatching(".*", "ansible_group");
+    "ansible_roles" slist => classesmatching(".*", "ansible_role");
     redhat::
       "ansible_package" string => "ansible-core";
     debian::
       "ansible_package" string => "ansible";
 
   reports:
-    "ansible_groups: ${ansible_groups}";
+    "ansible_roles: ${ansible_roles}";
 
   files:
     "$(localhost_inventory)"
@@ -32,7 +31,7 @@ ansible_connection=local
 {{#-top-}}[{{.}}]
 localhost
 {{/-top-}}",
-"ansible_groups"
+"ansible_roles"
 ),
       classes => if_ok("localhost_inventory_created");
 
