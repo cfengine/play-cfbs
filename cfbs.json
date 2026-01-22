@@ -68,13 +68,6 @@
       "tags": ["local"],
       "added_by": "cfbs add",
       "steps": ["json ./hub-port-8024.json def.json"]
-    },
-    {
-      "name": "./allow-connects-192-168.json",
-      "description": "Local augments file added using cfbs command line",
-      "tags": ["local"],
-      "added_by": "cfbs add",
-      "steps": ["json ./allow-connects-192-168.json def.json"]
     }
   ]
 }
