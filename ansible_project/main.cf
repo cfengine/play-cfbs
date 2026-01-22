@@ -11,9 +11,15 @@ bundle agent ansible_main
       meta => { "ansible_group" };
     "webserver"
       meta => { "ansible_group" };
+    "lockdown"
+      meta => { "ansible_group" };
 
   vars:
     "ansible_groups" slist => classesmatching(".*", "ansible_group");
+    redhat::
+      "ansible_package" string => "ansible-core";
+    debian::
+      "ansible_package" string => "ansible";
 
   reports:
     "ansible_groups: ${ansible_groups}";
@@ -35,7 +41,7 @@ localhost
       depth_search => recurse(inf);
 
   packages:
-    "ansible"
+    "${ansible_package}"
       classes => if_ok("ansible_package_installed");
 
   ansible:
