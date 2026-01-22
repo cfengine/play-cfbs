@@ -14,7 +14,10 @@ bundle agent ansible_main
     # for lockdown class I will add this in host info page e.g. CMDB: lockdown class with ansible_role tag
 
   vars:
-    "ansible_roles" slist => classesmatching(".*", "ansible_role");
+    # here we have to do some mangling to support CMDB since those classes are prefixed with the namespace "data:"
+    "ansible_role_classes" slist => classesmatching(".*", "ansible_role");
+    "ansible_roles_normalized[${ansible_role_classes}]" string => string_replace("${ansible_role_classes}", "data:", "");
+    "ansible_roles" slist => getvalues("ansible_roles_normalized");
     redhat::
       "ansible_package" string => "ansible-core";
     debian::
