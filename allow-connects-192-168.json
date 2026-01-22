@@ -1,0 +1,9 @@
+{
+  "variables": {
+    "default:def.control_server_allowconnects": {
+      "value": [
+        "192.168.0.0/24"
+      ]
+    }
+  }
+}
