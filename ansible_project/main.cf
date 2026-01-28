@@ -9,8 +9,6 @@ bundle agent ansible_main
     # initial thought about how to translate CFEngine classification into Ansible roles classification for dynamic inventory
     "managed"
       meta => { "ansible_role" };
-    "webserver"
-      meta => { "ansible_role" };
     # for lockdown class I will add this in host info page e.g. CMDB: lockdown class with ansible_role tag
 
   vars:
