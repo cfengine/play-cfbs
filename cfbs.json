@@ -93,8 +93,16 @@
       "description": "Local subdirectory added using cfbs command line",
       "tags": ["local"],
       "added_by": "cfbs add",
+      "steps": ["directory ./ ./"]
+    },
+    {
+      "name": "./package-method-ansible-galaxy-collections.cf",
+      "description": "Local policy file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
       "steps": [
-        "directory ./ ./"
+        "copy ./package-method-ansible-galaxy-collections.cf services/cfbs/package-method-ansible-galaxy-collections.cf",
+        "policy_files services/cfbs/package-method-ansible-galaxy-collections.cf"
       ]
     }
   ]
