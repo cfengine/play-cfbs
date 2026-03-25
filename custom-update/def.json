@@ -1,0 +1,9 @@
+{
+  "variables": {
+    "default:def.control_common_update_bundlesequence_end": {
+      "value": [
+        "custom_update_bundle"
+      ]
+    }
+  }
+}

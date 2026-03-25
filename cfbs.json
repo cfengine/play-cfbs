@@ -17,6 +17,16 @@
         "run EXPLICIT_VERSION=3.27.0 EXPLICIT_RELEASE=1 ./prepare.sh -y",
         "copy ./ ./"
       ]
+    },
+    {
+      "name": "./custom-update/",
+      "description": "Local subdirectory added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
+      "steps": [
+        "directory ./ services/cfbs/custom-update/",
+        "policy_files services/cfbs/custom-update/"
+      ]
     }
   ]
 }
