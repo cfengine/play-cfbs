@@ -1,5 +1,11 @@
 {
   "variables": {
+    "default:def.update_inputs": {
+      "value": [
+        "custom-update/custom_update_policy.cf"
+      ]
+    },
+
     "default:def.control_common_update_bundlesequence_end": {
       "value": [
         "custom_update_bundle"
