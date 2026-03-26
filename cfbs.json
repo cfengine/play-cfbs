@@ -24,8 +24,7 @@
       "tags": ["local"],
       "added_by": "cfbs add",
       "steps": [
-        "directory ./ services/cfbs/custom-update/",
-        "policy_files services/cfbs/custom-update/"
+        "directory ./ services/cfbs/custom-update/"
       ]
     }
   ]
