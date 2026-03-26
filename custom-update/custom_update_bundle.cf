@@ -11,11 +11,11 @@ bundle agent custom_update_bundle
     special_host::
       "${sys.inputdir}/files/special"
         perms => u_mog("0644", "root", "root" ),
-        copy_from => u_remote_dcp_missing_ok("${sys.masterdir}/special", "${sys.policy_hub}"),
+        copy_from => u_remote_dcp_missing_ok("${files_dir}/special", "${sys.policy_hub}"),
         depth_search => u_recurse("inf");
     any::
       "${sys.inputdir}/files/common"
         perms => u_mog("0644", "root", "root" ),
-        copy_from => u_remote_dcp_missing_ok("${sys.masterdir}/common", "${sys.policy_hub}"),
+        copy_from => u_remote_dcp_missing_ok("${files_dir}/common", "${sys.policy_hub}"),
         depth_search => u_recurse("inf");
 }
