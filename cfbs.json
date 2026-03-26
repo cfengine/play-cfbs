@@ -23,8 +23,17 @@
       "description": "Local subdirectory added using cfbs command line",
       "tags": ["local"],
       "added_by": "cfbs add",
+      "steps": ["directory ./ services/cfbs/custom-update/"]
+    },
+    {
+      "name": "./hello.cf",
+      "description": "Local policy file added using cfbs command line",
+      "tags": ["local"],
+      "added_by": "cfbs add",
       "steps": [
-        "directory ./ services/cfbs/custom-update/"
+        "copy ./hello.cf services/cfbs/hello.cf",
+        "policy_files services/cfbs/hello.cf",
+        "bundles hello"
       ]
     }
   ]
