@@ -1,4 +1,4 @@
-bundle agent custom_update_policy
+bundle agent custom_update_bundle
 {
   classes:
     "special_host" expression => fileexists("/etc/cfengine-special-host.flag");
