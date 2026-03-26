@@ -2,7 +2,7 @@
   "variables": {
     "default:def.update_inputs": {
       "value": [
-        "custom-update/custom_update_policy.cf"
+        "services/cfbs/custom-update/custom_update_policy.cf"
       ]
     },
 
